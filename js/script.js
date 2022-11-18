@@ -1,15 +1,13 @@
-let id = document.getElementById("id");
-let nom = document.getElementById("nom");
-let postnom = document.getElementById('postnom');
-let prenom = document.getElementById('prenom');
-let pays = document.getElementById('pays');
-let genre = document.getElementById('genre');
-let github = document.getElementById('github');
+ id = document.getElementById("id");
+ nom = document.getElementById("nom");
+ postnom = document.getElementById('postnom');
+ prenom = document.getElementById('prenom');
+ pays = document.getElementById('pays');
+ genre = document.getElementById('genre');
+ github = document.getElementById('github');
 var form = document.querySelector("#form");
 let submitbtn = document.getElementById("submitbtn")
-
-
-class Personnes{
+class Apprenants{
     constructor(id,nom,postnom,prenom,pays,genre,github){
         this.id = id
         this.nom = nom;
@@ -21,62 +19,40 @@ class Personnes{
     }
     
 }
-
-class UI{
-    static displaylist(){
-        const personnes = [
-           {
-            id :2,
-            nom : 'paul',
-            postnom : 'henri',
-            prenom:'jule',
-            pays: 'cote',
-            genre:'masculin',
-            github: 'jule@hot.com'
-           }
-        ]
-
-        personnes.forEach((personne) =>{
-            UI.addInList(personne)
-        })
-    }
-
-    static addInList(personne){
+class ApprenantInterface{
+    static addInListApprenant(apprenant){
         let tableBody = document.querySelector('.table tbody')
         tableBody.innerHTML = ''
-        
             let temp = `<tr>
-                <td>${personne.id}</td>
-                <td>${personne.nom}</td>
-                <td>${personne.postnom}</td>
-                <td>${personne.prenom}</td>
-                <td>${personne.pays}</td>
-                <td>${personne.genre}</td>
-                <td>${personne.github}</td>
+                <td>${apprenant.id}</td>
+                <td>${apprenant.nom}</td>
+                <td>${apprenant.postnom}</td>
+                <td>${apprenant.prenom}</td>
+                <td>${apprenant.pays}</td>
+                <td>${apprenant.genre}</td>
+                <td>${apprenant.github}</td>
                 <td>
-                    <button>Supprimmer</button>
-                    <button data-title="${personne.nom}" data-id="${personne.id}" onclick="editTask(this)">Modifier</button>
+                    <button class = "btn btn-danger">Supprimmer</button>
+                </td>
+                <td>
+                    <button data-title="${apprenant.nom}" data-id="${apprenant.id}" onclick="editTask(this)" class="btn btn-warning">Modifier</button>
                 </td>
             </tr>`
     
             tableBody.innerHTML += temp
             
             
-    }
+        }
 
-    static displayMessage(message){
+    static alertMessage(message){
         form.insertAdjacentHTML('beforebegin',`<div class = "alert alert-info">${message}</div>`)
         var alert = document.querySelector(".alert");
         var liste = document.querySelector('.liste')
         setTimeout(()=>{
             liste.removeChild(alert);
         }, 2000);
+        }
     }
-}
-
-
-      
-//  document.addEventListener('DOMContentLoaded',UI.displaylist())
 
 form.addEventListener('click',function(e){
     e.preventDefault()
@@ -89,11 +65,10 @@ form.addEventListener('click',function(e){
     var githubValue = github.value;
 
     if(idValue==='' || nomValue==='' || postnomValue==='' || prenomValue==='' || paysValue==='' || genreValue==='' || githubValue===''){
-        UI.displayMessage("Tous les champs doivent etre rempli")
+        ApprenantInterface.alertMessage("Tous les champs doivent etre rempli")
     }else{
-           var personne = new Personnes(idValue,nomValue,postnomValue,prenomValue,paysValue,genreValue,githubValue);
-           UI.addInList(personne)
-    }
-
-})
+           var apprenant = new Apprenants(idValue,nomValue,postnomValue,prenomValue,paysValue,genreValue,githubValue);
+           ApprenantInterface.addInListApprenant(apprenant)
+        }
+    })
 

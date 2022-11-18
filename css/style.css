@@ -1,5 +1,20 @@
 h1{
                text-align: center;
+               margin-bottom: 20px;
+               
+}
+
+.inscription{
+               text-align: center;
+               margin-bottom: 20px;
+               
+}
+
+
+.listappr{
+               text-align: center;
+               margin-bottom: 20px;
+               
 }
 
 
@@ -7,3 +22,10 @@ h1{
                width: 50%;
 }
 
+.btn-danger{
+               width: 90%;
+} 
+
+.btn-warning{
+               width: 100%;
+} 
