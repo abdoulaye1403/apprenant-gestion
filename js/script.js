@@ -16,15 +16,7 @@ class Apprenants{
 
  // class interface apprenant
 class ApprenantInterface{
-    // liste des apprenant
-    // static ApprenantList(){
-    //     const apprenants = LocalApprenant.getApprenant();
-    //     apprenants.forEach((apprenant)=>{
-    //         ApprenantInterface.addInListApprenant(apprenant)
-    //     })
-
-    // }
-
+    
     // methode ajouter un apprenant
     static addInListApprenant(apprenant){
         var tableBody = document.querySelector('.table tbody')
@@ -45,11 +37,7 @@ class ApprenantInterface{
                 </td>
             </tr>`
     
-            tableBody.innerHTML += temp
-
-           
-           
-            
+            tableBody.innerHTML += temp        
             
         }
 
@@ -104,9 +92,7 @@ form.addEventListener('click',function(e){
         //    creer un apprenant
         var apprenant = new Apprenants(idValue,nomValue,postnomValue,prenomValue,paysValue,genreValue,githubValue);
 
-        // ajouter dynamiquement un apprenant
-
-        // LocalApprenant.addApprenant(apprenant)
+       
 
         //    ajouter un apprenant dans la liste
            ApprenantInterface.addInListApprenant(apprenant)
@@ -122,11 +108,9 @@ form.addEventListener('click',function(e){
         e.preventDefault();
         var tr = e.target.parentElement.parentElement;
         tableBody.removeChild(tr)
-        // var idvalue = tr.children[0].innerHTML;
-        // LocalApprenant.suppApprenant(idvalue)
-
-        // location.reload()
+        
     })
 
 
 
+    
