@@ -1,31 +1,33 @@
 h1{
                text-align: center;
                margin-bottom: 20px;
+               text-decoration: underline;
                
 }
 
-.inscription{
+.inscription,.listappr{
+               text-align: center;
+               margin-bottom: 20px;
+               text-decoration: underline;
+               
+}
+
+
+/* .listappr{
                text-align: center;
                margin-bottom: 20px;
                
-}
-
-
-.listappr{
-               text-align: center;
-               margin-bottom: 20px;
-               
-}
+} */
 
 
 .btn{
                width: 50%;
 }
 
-.btn-danger{
+/* .btn-danger{
                width: 90%;
-} 
+}  */
 
-.btn-warning{
+.btn-warning,.btn-danger{
                width: 100%;
 } 

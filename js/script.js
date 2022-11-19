@@ -1,12 +1,6 @@
- id = document.getElementById("id");
- nom = document.getElementById("nom");
- postnom = document.getElementById('postnom');
- prenom = document.getElementById('prenom');
- pays = document.getElementById('pays');
- genre = document.getElementById('genre');
- github = document.getElementById('github');
-var form = document.querySelector("#form");
-let submitbtn = document.getElementById("submitbtn")
+
+
+ // class apprenant 
 class Apprenants{
     constructor(id,nom,postnom,prenom,pays,genre,github){
         this.id = id
@@ -19,11 +13,23 @@ class Apprenants{
     }
     
 }
+
+ // class interface apprenant
 class ApprenantInterface{
+    // liste des apprenant
+    // static ApprenantList(){
+    //     const apprenants = LocalApprenant.getApprenant();
+    //     apprenants.forEach((apprenant)=>{
+    //         ApprenantInterface.addInListApprenant(apprenant)
+    //     })
+
+    // }
+
+    // methode ajouter un apprenant
     static addInListApprenant(apprenant){
-        let tableBody = document.querySelector('.table tbody')
+        var tableBody = document.querySelector('.table tbody')
         tableBody.innerHTML = ''
-            let temp = `<tr>
+            var temp = `<tr>
                 <td>${apprenant.id}</td>
                 <td>${apprenant.nom}</td>
                 <td>${apprenant.postnom}</td>
@@ -35,15 +41,19 @@ class ApprenantInterface{
                     <button class = "btn btn-danger">Supprimmer</button>
                 </td>
                 <td>
-                    <button data-title="${apprenant.nom}" data-id="${apprenant.id}" onclick="editTask(this)" class="btn btn-warning">Modifier</button>
+                    <button class="btn btn-warning">Modifier</button>
                 </td>
             </tr>`
     
             tableBody.innerHTML += temp
+
+           
+           
             
             
         }
 
+// // methode afficher message d'erreur
     static alertMessage(message){
         form.insertAdjacentHTML('beforebegin',`<div class = "alert alert-info">${message}</div>`)
         var alert = document.querySelector(".alert");
@@ -52,23 +62,71 @@ class ApprenantInterface{
             liste.removeChild(alert);
         }, 2000);
         }
-    }
+    
+        // methode vider les champs
+        static viderChamp(){
+             document.querySelector('#id').value = '';
+             document.querySelector('#nom').value = '';
+             document.querySelector('#postnom').value = '';
+             document.querySelector('#prenom').value = '';
+             document.querySelector('#pays').value = '';
+             document.querySelector('#genre').value = '';
+             document.querySelector('#github').value = '';
+        
+        }
+}
 
+  document.addEventListener('DOMContentLoaded',ApprenantInterface.ApprenantList);
+
+// // ajouter un apprenant
+var form = document.querySelector("#form");
 form.addEventListener('click',function(e){
+    // empecher une erreur
     e.preventDefault()
-    var idValue = id.value;
-    var nomValue = nom.value;
-    var postnomValue = postnom.value;
-    var prenomValue = prenom.value;
-    var paysValue = pays.value;
-    var genreValue = genre.value;
-    var githubValue = github.value;
+
+    // recuperer les champs
+    var idValue = document.querySelector('#id').value;
+    var nomValue = document.querySelector('#nom').value;
+    var postnomValue = document.querySelector('#postnom').value;
+    var prenomValue = document.querySelector('#prenom').value;
+    var paysValue = document.querySelector('#pays').value;
+    var genreValue = document.querySelector('#genre').value;
+    var githubValue = document.querySelector('#github').value;
+
+    // verifier si les champs ne sont pas vide
 
     if(idValue==='' || nomValue==='' || postnomValue==='' || prenomValue==='' || paysValue==='' || genreValue==='' || githubValue===''){
-        ApprenantInterface.alertMessage("Tous les champs doivent etre rempli")
+
+        // afficher le message d'erreur
+       ApprenantInterface.alertMessage("Tous les champs doivent etre rempli")
     }else{
-           var apprenant = new Apprenants(idValue,nomValue,postnomValue,prenomValue,paysValue,genreValue,githubValue);
+
+        //    creer un apprenant
+        var apprenant = new Apprenants(idValue,nomValue,postnomValue,prenomValue,paysValue,genreValue,githubValue);
+
+        // ajouter dynamiquement un apprenant
+
+        // LocalApprenant.addApprenant(apprenant)
+
+        //    ajouter un apprenant dans la liste
            ApprenantInterface.addInListApprenant(apprenant)
+
+        //    vider les champs
+           ApprenantInterface.viderChamp();
+        
         }
     })
+
+    var tableBody = document.querySelector(".table tbody")
+    tableBody.addEventListener('click',(e)=>{
+        e.preventDefault();
+        var tr = e.target.parentElement.parentElement;
+        tableBody.removeChild(tr)
+        // var idvalue = tr.children[0].innerHTML;
+        // LocalApprenant.suppApprenant(idvalue)
+
+        // location.reload()
+    })
+
+
 
