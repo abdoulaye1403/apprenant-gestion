@@ -1,14 +1,22 @@
 var form = document.getElementById('form')
 var tableBody = document.querySelector('.table tbody')
-let submitbtn = document.getElementById('submitbtn')
+var submitbtn = document.getElementById('submitbtn')
 
-let editMode = false
-let editionApprenant = null
+var id = document.querySelector('#id');
+var nom = document.querySelector('#nom');
+var postnom = document.querySelector('#postnom');
+var prenom = document.querySelector('#prenom');
+var pays = document.querySelector('#pays');
+var genre = document.querySelector('#genre');
+var github = document.querySelector('#github');
+
+var editMode = false
+var editionApprenant = null
 
 editModeEnabled(editMode)
-
+ console.log(id)
 class Apprenants{
-         constructor(id,nom,postnom,prenom,pays,genre,github){
+    constructor(id,nom,postnom,prenom,pays,genre,github){
              this.id = id
              this.nom = nom;
              this.postnom = postnom;
@@ -16,9 +24,9 @@ class Apprenants{
              this.pays = pays;
              this.genre = genre;
              this.github = github
-         }
+    }
         
-     }
+}
 var apprenant1 = new Apprenants(1,'Toure','Mahamadou','Abdoulaye','Mali','Masculin','abdelraul@github.com');
 var apprenant2 = new Apprenants(2,'Maiga','Houney','Aicha','Mali','Feminin','aicha@github.com')
 var apprenants = [apprenant1,apprenant2]
@@ -57,51 +65,43 @@ loadApprenantInTable()
 
 form.addEventListener('submit', function(e){
     e.preventDefault();
-    var idValue = document.querySelector('#id').value;
-     var nomValue = document.querySelector('#nom').value;
-     var postnomValue = document.querySelector('#postnom').value;
-     var prenomValue = document.querySelector('#prenom').value;
-     var paysValue = document.querySelector('#pays').value;
-     var genreValue = document.querySelector('#genre').value;
-     var githubValue = document.querySelector('#github').value;
-     if(idValue==='' || nomValue==='' || postnomValue==='' || prenomValue==='' || paysValue==='' || genreValue==='' || githubValue===''){
+        idValue = id.value;
+        nomValue = nom.value;
+        postnomValue = postnom.value;
+        prenomValue = prenom.value
+        paysValue = pays.value;
+        genreValue = genre.value;
+        githubValue = github.value
+    
+    if(idValue==='' || nomValue==='' || postnomValue==='' || prenomValue==='' || paysValue==='' || genreValue==='' || githubValue===''){
 
-                  alert("Tous les champs doivent etre rempli")
+        alert("Tous les champs doivent etre rempli")
                 
-             }else{
+    }else{
+        var apprenant = new Apprenants(idValue,nomValue,postnomValue,prenomValue,paysValue,genreValue,githubValue);
         
-                     
-                 var apprenant = new Apprenants(idValue,nomValue,postnomValue,prenomValue,paysValue,genreValue,githubValue);
-        
-               
-        
-                 if(editMode) {
-                    updateApprenant(apprenant)
-                } else {
-                    addApprenant(apprenant);
-                }
-                    
-        
-                     
-                     viderChamp();
-                
-                 }
+        if(editMode) {
+            updateApprenant(apprenant)
+        }else {
+            addApprenant(apprenant);
+        }
+            viderChamp();
+                            
+    }
 })
-
-
-    
-    
+  
 function viderChamp(){
-              document.querySelector('#id').value = '';
-              document.querySelector('#nom').value = '';
-              document.querySelector('#postnom').value = '';
-              document.querySelector('#prenom').value = '';
-              document.querySelector('#pays').value = '';
-              document.querySelector('#genre').value = '';
-              document.querySelector('#github').value = '';
+    id.value = '';
+    postnom.value = '';
+    nom.value= '';
+    prenom.value = '';
+    pays.value = '';
+    genre.value= '';
+    github.value = '';
 }
 
 function updateApprenant(apprenant) {
+    apprenants.find((t) => t.id == editionApprenant.id).id = apprenant.id
     apprenants.find((t) => t.id == editionApprenant.id).nom = apprenant.nom
     apprenants.find((t) => t.id == editionApprenant.id).postnom = apprenant.postnom
     apprenants.find((t) => t.id == editionApprenant.id).prenom = apprenant.prenom
@@ -128,12 +128,13 @@ function deleteApprenant(e){
 
 function editApprenant(e) {
     editModeEnabled(true)
-    document.querySelector('#nom').value = e.dataset.nom
-    document.querySelector('#postnom').value = e.dataset.postnom
-    document.querySelector('#prenom').value = e.dataset.prenom
-    document.querySelector('#pays').value = e.dataset.pays
-    document.querySelector('#genre').value = e.dataset.genre
-    document.querySelector('#github').value = e.dataset.github
+    id.value = e.dataset.id
+    nom.value = e.dataset.nom
+    postnom.value = e.dataset.postnom
+    prenom.value = e.dataset.prenom
+    pays.value = e.dataset.pays
+    genre.value = e.dataset.genre
+    github.value = e.dataset.github
     editionApprenant = apprenants.find((t) => t.id == e.dataset.id)
 }
 
@@ -145,7 +146,7 @@ function editModeEnabled(enabled) {
         editMode = false
         submitbtn.innerText = "Ajouter"
         editionApprenant = null
-        viderChamp()
+        
     }
 }
     
